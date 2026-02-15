@@ -1,7 +1,6 @@
 const chatArea = document.querySelector(".chat-area");
 const input = document.querySelector("#chat-input");
 const sendBtn = document.querySelector("#send-btn");
-const progressBar = document.querySelector(".progress-bar-inner");
 
 const questions = [
   "やっほー！まずは軽くいこう〜 最近『これ頑張ったな〜』って思う出来事ある？",
@@ -30,17 +29,11 @@ function addMessage(text, sender = "bot") {
   chatArea.scrollTop = chatArea.scrollHeight;
 }
 
-function updateProgress() {
-  const ratio = Math.min(currentStep / questions.length, 1);
-  progressBar.style.width = `${ratio * 100}%`;
-}
-
 function askNextQuestion() {
   if (currentStep < questions.length) {
     addMessage(questions[currentStep], "bot");
-    updateProgress();
   } else {
-    generatePR(); // ← AI版を呼ぶ
+    generatePR();
   }
 }
 
@@ -58,35 +51,23 @@ function handleUserInput() {
 
 function saveAnswer(text) {
   switch (currentStep) {
-    case 0:
-      answers.episode = text;
-      break;
-    case 1:
-      answers.situation = text;
-      break;
-    case 2:
-      answers.role = text;
-      break;
-    case 3:
-      answers.action = text;
-      break;
-    case 4:
-      answers.result = text;
-      break;
-    case 5:
-      answers.learning = text;
-      break;
+    case 0: answers.episode = text; break;
+    case 1: answers.situation = text; break;
+    case 2: answers.role = text; break;
+    case 3: answers.action = text; break;
+    case 4: answers.result = text; break;
+    case 5: answers.learning = text; break;
   }
 }
 
 // -------------------------
-// ここからAI接続部分
-// ----------------
+// AI接続部分
+// -------------------------
 
 async function generatePR() {
   addMessage("ちょっと待ってね…自己PRを作成中だよ！", "bot");
 
-  const apiKey = "skzahun"; // ←ここにAPIキーを貼る
+  const apiKey = "skzahun";
 
   const prompt = `
 あなたは就活のプロのキャリアアドバイザーです。
@@ -140,6 +121,5 @@ input.addEventListener("keydown", (e) => {
   if (e.key === "Enter") handleUserInput();
 });
 
-// 初回の質問を表示
+// 初回の質問
 askNextQuestion();
-
