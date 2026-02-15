@@ -8,16 +8,26 @@ body {
   height: 100vh;
 }
 
+/* スマホでもPCでも中央に収まる */
 .app-container {
   width: 100%;
   max-width: 480px;
-  height: 90vh;
+  height: 100vh;
   background: #ffffff;
-  border-radius: 24px;
-  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.08);
+  border-radius: 0; /* スマホは丸みを消すと自然 */
   display: flex;
   flex-direction: column;
   overflow: hidden;
+  box-shadow: 0 0 0 rgba(0,0,0,0); /* スマホでは影を消す */
+}
+
+@media (min-width: 600px) {
+  /* PC のときだけ丸みと影を付ける */
+  .app-container {
+    height: 90vh;
+    border-radius: 24px;
+    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.08);
+  }
 }
 
 .app-header {
@@ -93,30 +103,20 @@ body {
   flex: 1;
   border-radius: 999px;
   border: 1px solid #d1d5db;
-  padding: 10px 14px;
-  font-size: 14px;
+  padding: 12px 16px;
+  font-size: 16px; /* スマホで押しやすいサイズ */
   outline: none;
-}
-
-.input-area input:focus {
-  border-color: #a855f7;
-  box-shadow: 0 0 0 2px rgba(168, 85, 247, 0.2);
 }
 
 .input-area button {
   border: none;
   border-radius: 999px;
-  padding: 10px 16px;
+  padding: 12px 16px;
   background: #a855f7;
   color: #ffffff;
-  font-size: 14px;
+  font-size: 15px;
   font-weight: 600;
   cursor: pointer;
-}
-
-.input-area button:disabled {
-  opacity: 0.5;
-  cursor: default;
 }
 
 .result-card {
