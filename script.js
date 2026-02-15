@@ -40,7 +40,7 @@ function askNextQuestion() {
     addMessage(questions[currentStep], "bot");
     updateProgress();
   } else {
-    generateDummyPR();
+    generatePR(); // ← AI版を呼ぶ
   }
 }
 
@@ -79,32 +79,6 @@ function saveAnswer(text) {
   }
 }
 
-function generateDummyPR() {
-  updateProgress();
-  addMessage("ナイス！今の内容で自己PRのたたき台をつくってみたよ👇", "bot");
-
-  const prText = `
-私は「${answers.episode}」に取り組んだ経験を通して、${answers.learning}という強みを身につけました。
-
-この経験では、${answers.situation}という状況の中で、私は${answers.role}として行動しました。その中で特に意識したのは、${answers.action}という点です。
-
-その結果、${answers.result}という成果につながりました。この経験から、私は${answers.learning}な人間であり、この強みを今後の環境でも発揮できると考えています。
-  `.trim();
-
-  const card = document.createElement("div");
-  card.classList.add("result-card");
-  card.innerHTML = `
-    <h3>自己PR（たたき台）</h3>
-    <pre>${prText}</pre>
-  `;
-  chatArea.appendChild(card);
-  chatArea.scrollTop = chatArea.scrollHeight;
-}
-
-sendBtn.addEventListener("click", handleUserInput);
-input.addEventListener("keydown", (e) => {
-  if (e.key === "Enter") handleUserInput();
-});
-
-// 初回の質問を表示
-askNextQuestion();
+// -------------------------
+// ここからAI接続部分
+// ----------------
