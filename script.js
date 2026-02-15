@@ -67,7 +67,7 @@ function saveAnswer(text) {
 async function generatePR() {
   addMessage("ちょっと待ってね…自己PRを作成中だよ！", "bot");
 
-  const apiKey = "skzahun";
+  const apiKey = "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";
 
   const prompt = `
 あなたは就活のプロのキャリアアドバイザーです。
